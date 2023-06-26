@@ -20,12 +20,14 @@ namespace Ahlatci.Shop.Domain.Entites
         public int UnitInStock { get; set; }
         public Decimal UnitPrice{ get; set; }
 
-
+        public string ThumbnailImage { get; set; }
         //navigation property
         public Catergory Catergory { get; set; }
 
+        public ICollection<ProductImage> ProductImages { get; set;}
+        public ICollection<OrderDetail> OrderDetails { get; set; }
 
-        
-    
+        public ICollection<Comment> Comment { get; set; }   
+
     }
 }
