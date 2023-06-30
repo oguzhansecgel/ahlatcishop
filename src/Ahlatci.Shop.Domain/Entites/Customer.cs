@@ -18,7 +18,6 @@ namespace Ahlatci.Shop.Domain.Entites
         public string Phone { get; set; }
         public Gender Gender { get; set; }
 
-        public Account Account{ get; set; }
 
         public ICollection<Order> Orders { get; set; }
 
