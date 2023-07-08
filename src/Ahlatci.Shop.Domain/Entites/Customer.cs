@@ -19,9 +19,9 @@ namespace Ahlatci.Shop.Domain.Entites
         public Gender Gender { get; set; }
 
 
+        public Account Account{ get; set; }
         public ICollection<Order> Orders { get; set; }
 
-        public ICollection<Address> Adresses{ get; set; }
 
         public ICollection<Comment> Comments { get; set; }
     }
