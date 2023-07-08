@@ -72,7 +72,7 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.HasForeignKey(x => x.CityId)
 				.HasConstraintName("CUSTOMER_CITY_ACCOUNT_ID");
 
-
+			builder.ToTable("CUSTOMERS");
 
 
 		}

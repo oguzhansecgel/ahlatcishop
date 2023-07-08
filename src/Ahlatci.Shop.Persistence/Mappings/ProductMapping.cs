@@ -41,6 +41,9 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.HasForeignKey(x => x.CatId)
 				.HasConstraintName("PRODUCT_CATERGORY_CATERGORY_ID");
 
+			builder.ToTable("PRODUCTS");
+
+
 		}
 	}
 }

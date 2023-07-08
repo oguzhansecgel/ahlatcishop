@@ -42,6 +42,7 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.HasForeignKey(x => x.AddressId)
 				.HasConstraintName("ORDER_ADDRESS_ADDRESS_ID");
 
+			builder.ToTable("ORDERS");
 
 		}
 	}

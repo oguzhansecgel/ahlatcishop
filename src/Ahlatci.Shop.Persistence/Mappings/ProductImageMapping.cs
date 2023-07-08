@@ -36,6 +36,8 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.WithMany(x => x.ProductImages)
 				.HasForeignKey(x => x.ProductId)
 				.HasConstraintName("PRODUCT_IMAGE_PRODUCT_PRODUCT_ID"); //product image git product tablosunda ki product id ile 
+
+			builder.ToTable("PRODUCTIMAGES");
 		}
 
 	}

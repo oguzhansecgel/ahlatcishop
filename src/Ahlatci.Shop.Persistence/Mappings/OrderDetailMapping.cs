@@ -38,6 +38,8 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.WithMany(x => x.OrderDetails)
 				.HasForeignKey(x => x.ProductId)
 				.HasConstraintName("ORDER_DETAIL_PRODUCT_PRODUCT_ID");
+
+			builder.ToTable("ORDERDETAILS");
 		}
 	}
 }

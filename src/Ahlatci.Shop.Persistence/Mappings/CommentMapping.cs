@@ -43,6 +43,8 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.HasForeignKey(x => x.CustomerId)
 				.HasConstraintName("COMMENT_CUSTOMER_CUSTOMER_ID");
 
+			builder.ToTable("COMMENTS");
+
 		}
 	}
 }
