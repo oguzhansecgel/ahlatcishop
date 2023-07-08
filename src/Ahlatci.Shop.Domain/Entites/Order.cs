@@ -10,9 +10,9 @@ namespace Ahlatci.Shop.Domain.Entites
     public class Order : AuditableEntity
     {
         public int CustomerId { get; set; }
+        public int AddressId { get; set; }
         public DateTime OrderDate { get; set; }
-        public string Address { get; set; }
-        public bool IsDelivered { get; set; }
+        public Address Address { get; set; }
         public OrderStatus Status { get; set; }
         public Customer Customer { get; set; }
 

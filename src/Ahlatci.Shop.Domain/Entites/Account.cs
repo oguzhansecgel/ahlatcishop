@@ -13,7 +13,8 @@ namespace Ahlatci.Shop.Domain.Entites
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime? LastLoginDate { get; set; }
-        public  string LastUserIp { get; set; } 
+        public  string LastUserIp { get; set; }
+        
         public Customer Customer { get; set; }
     }
 }

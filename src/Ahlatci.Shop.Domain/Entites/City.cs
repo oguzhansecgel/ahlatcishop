@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Domain.Entites
 {
-    public class City : BaseEntity
+	
+
+	public class City : BaseEntity
     {
+       
         public string Name{ get; set; }
 
-    }
+
+		public ICollection <Address> Address { get; set; }
+		public ICollection<Customer> Customers { get; set; }
+
+	}
 }
