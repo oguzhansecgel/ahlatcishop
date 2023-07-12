@@ -11,6 +11,7 @@ namespace Ahlatci.Shop.Persistence.Mappings
 			builder.Property(x => x.CustomerId) // foreign key customer tablosu için
 			   .HasColumnName("CUSTOMER_ID")
 			   .HasColumnOrder(2);
+		
 
 			builder.Property(x => x.Username)
 				.HasColumnType("nvarchar(10)")

@@ -1,0 +1,80 @@
+﻿Mapping Kullanım Amacı Nedir ?
+ Örnekle migration yaparak tablo oluşturma şansımız varken burda tablolara kendimiz müdahele edebiliyoruz. Migration ile yine sql tabanına database oluşturabiliyoruz.
+ 
+ Örnek vermek gerekirse ;
+ 
+ 
+ // bire bire ilişki için tablo böyle düzenlenir
+
+			builder.HasOne(x => x.Account)
+				.WithOne(x => x.Customer)
+				.HasForeignKey<Customer>(x => x.AccountId)
+				.HasConstraintName("CUSTOMER_ACCOUNT_ACCOUNT_ID");
+				
+// birden çoğa ilişki için tablo böyle düzenlenir.
+
+			builder.HasOne(x => x.City)
+				.WithMany(x => x.Customers)
+				.HasForeignKey(x => x.CityId)
+				.HasConstraintName("CUSTOMER_CITY_ACCOUNT_ID");
+
+			builder.ToTable("CUSTOMERS");
+
+			Eğer Kalıtım almış bir entity sınıfları varsa;
+			kalıtım alınan sınıfın örnek kod bloğu
+
+	public abstract class BaseEntityMapping<T> : IEntityTypeConfiguration<T> where T : BaseEntity
+	{
+		public abstract void ConfigureDerivedEntityMapping(EntityTypeBuilder<T> builder);
+
+		public void Configure(EntityTypeBuilder<T> builder)
+		{
+			builder.HasKey(x => x.Id);
+			builder.Property(x=>x.Id)
+				.HasColumnName("ID")
+				.HasColumnOrder(1);
+			
+			ConfigureDerivedEntityMapping(builder);
+
+
+			builder.Property(x => x.IsDeleted)
+				.HasColumnName("IS_DELETED")
+				.HasColumnOrder(30)
+				.HasDefaultValueSql("0");
+		}
+	}
+
+	buda mapping ile kalıtım almış bir sınıfın örneği 
+	public class AccountMapping : BaseEntityMapping<Account>
+	{
+		public override void ConfigureDerivedEntityMapping(EntityTypeBuilder<Account> builder)
+		{
+			builder.Property(x => x.CustomerId) // foreign key customer tablosu için
+			   .HasColumnName("CUSTOMER_ID")
+			   .HasColumnOrder(2);
+		
+
+			builder.Property(x => x.Username)
+				.HasColumnType("nvarchar(10)")
+				.HasColumnName("USER_NAME")
+				.HasColumnOrder(3);
+
+			builder.Property(x => x.Password)
+				.IsRequired() //boş bırakılmaz zorunlu alan
+				.HasColumnType("nvarchar(100)")
+				.HasColumnName("PASSWORD")
+				.HasColumnOrder(4);
+			builder.Property(x => x.LastLoginDate)
+				.HasColumnName("LAST_LOGIN_DATE")
+				.HasColumnOrder(5);
+			builder.Property(x => x.LastUserIp)
+				.HasColumnType("nvarchar(50)")
+				.HasColumnName("LAST_LOGIN_IP")
+				.HasColumnOrder(6);
+
+			builder.HasOne(x => x.Customer) //birden bire ilişki tablosu
+				.WithOne(x => x.Account);
+
+			builder.ToTable("ACCOUNTS");
+		}
+	}

@@ -61,12 +61,12 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.IsRequired()
 				.HasColumnOrder(10);
 
-
+			// bire bire ilişki için tablo böyle düzenlenir
 			builder.HasOne(x => x.Account)
 				.WithOne(x => x.Customer)
 				.HasForeignKey<Customer>(x => x.AccountId)
 				.HasConstraintName("CUSTOMER_ACCOUNT_ACCOUNT_ID");
-
+			// birden çoğa ilişki için tablo böyle düzenlenir.s
 			builder.HasOne(x => x.City)
 				.WithMany(x => x.Customers)
 				.HasForeignKey(x => x.CityId)
