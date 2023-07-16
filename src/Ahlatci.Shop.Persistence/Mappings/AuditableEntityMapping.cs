@@ -39,6 +39,7 @@ namespace Ahlatci.Shop.Persistence.Mappings
 			builder.Property(x => x.ModifiedBy)
 			   .HasColumnName("MODIFIED_BY")
 			   .HasColumnOrder(29);
+
 			builder.Property(x => x.IsDeleted)
 		.HasColumnName("IS_DELETED")
 		.HasColumnOrder(30)
