@@ -22,7 +22,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Account", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.ToTable("ACCOUNTS", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Address", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.ToTable("ADDRESSES", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Catergory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,8 +123,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<bool?>("IsDeleted")
@@ -135,7 +136,8 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -147,15 +149,15 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("CATEGORY_NAME")
+                        .HasColumnName("NAME")
                         .HasColumnOrder(2);
 
                     b.HasKey("Id");
 
-                    b.ToTable("CATEGORIES", (string)null);
+                    b.ToTable("CATERGORIES", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.City", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,10 +182,10 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CITIES", (string)null);
+                    b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Comment", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,8 +201,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<int>("CustomerId")
@@ -219,7 +222,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnName("DISLIKE_COUNT")
                         .HasColumnOrder(6);
 
-                    b.Property<bool?>("IsApproved")
+                    b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasColumnName("IS_APPROVED")
@@ -239,7 +242,8 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -262,7 +266,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.ToTable("COMMENTS", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -279,7 +283,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.Property<DateTime>("Birtdate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("BIRTHDATE")
+                        .HasColumnName("BIRTDATE")
                         .HasColumnOrder(9);
 
                     b.Property<int>("CityId")
@@ -293,8 +297,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<string>("Email")
@@ -311,7 +316,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Property<string>("IdentityNumber")
                         .IsRequired()
                         .HasColumnType("nchar(11)")
-                        .HasColumnName("IDENTITY_NUMBER")
+                        .HasColumnName("IDENDITY_NUMBER")
                         .HasColumnOrder(4);
 
                     b.Property<bool?>("IsDeleted")
@@ -322,7 +327,8 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -339,11 +345,11 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nchar(13)")
+                        .HasColumnType("nvarchar(13)")
                         .HasColumnName("PHONE")
                         .HasColumnOrder(8);
 
-                    b.Property<string>("Surname")
+                    b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("SURNAME")
@@ -359,7 +365,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.ToTable("CUSTOMERS", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Order", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -371,7 +377,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.Property<int>("AddressId")
                         .HasColumnType("int")
-                        .HasColumnName("ADDRESS_ID")
+                        .HasColumnName("ADDRESS")
                         .HasColumnOrder(3);
 
                     b.Property<DateTime?>("CreateDate")
@@ -380,8 +386,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<int>("CustomerId")
@@ -397,7 +404,8 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -406,7 +414,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasColumnName("ORDER_DATE")
@@ -427,7 +435,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.ToTable("ORDERS", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.OrderDetail", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.OrderDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -443,8 +451,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<bool?>("IsDeleted")
@@ -455,7 +464,8 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -476,7 +486,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
-                        .HasColumnName("QUANTITY")
+                        .HasColumnName("QUANTİTY")
                         .HasColumnOrder(4);
 
                     b.Property<decimal>("TotalPrice")
@@ -490,81 +500,62 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ORDER_DETAILS", (string)null);
+                    b.ToTable("ORDERDETAILS", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int")
-                        .HasColumnName("CATEGORY_ID")
-                        .HasColumnOrder(2);
+                    b.Property<int>("CatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CatergoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CREATE_DATE")
-                        .HasColumnOrder(26);
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
-                        .HasColumnOrder(27);
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("DETAIL")
-                        .HasColumnOrder(4);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasColumnName("IS_DELETED")
-                        .HasColumnOrder(30)
-                        .HasDefaultValueSql("0");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("MODIFIED_BY")
-                        .HasColumnOrder(29);
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATE")
-                        .HasColumnOrder(28);
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("NAME")
-                        .HasColumnOrder(3);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UnitInStock")
-                        .HasColumnType("int")
-                        .HasColumnName("UNIT_IN_STOCK")
-                        .HasColumnOrder(5);
+                        .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("UNIT_PRICE")
-                        .HasColumnOrder(6);
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CatergoryId");
 
-                    b.ToTable("PRODUCTS", (string)null);
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.ProductImage", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -580,8 +571,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(26);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("CREATED_BY")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
                     b.Property<bool?>("IsDeleted")
@@ -591,13 +583,14 @@ namespace Ahlatci.Shop.Persistence.Migrations
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
-                    b.Property<bool?>("IsThumbnail")
+                    b.Property<bool>("IsThumbnail")
                         .HasColumnType("bit")
-                        .HasColumnName("IS_THUMBNAIL")
-                        .HasColumnOrder(6);
+                        .HasColumnName("IS_THUMBAIL")
+                        .HasColumnOrder(5);
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(10)")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
@@ -609,7 +602,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int")
                         .HasColumnName("ORDER")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -626,13 +619,13 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("PRODUCT_IMAGES", (string)null);
+                    b.ToTable("PRODUCTIMAGES", (string)null);
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Address", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Address", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.City", "City")
-                        .WithMany("Addresses")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.City", "City")
+                        .WithMany("Address")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -641,17 +634,17 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Comment", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Comment", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Customer", "Customer")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Customer", "Customer")
                         .WithMany("Comments")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("COMMENT_CUSTOMER_CUSTOMER_ID");
 
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Product", "Product")
-                        .WithMany("Comments")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Product", "Product")
+                        .WithMany("Comment")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -662,37 +655,37 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Customer", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Account", "Account")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Account", "Account")
                         .WithOne("Customer")
-                        .HasForeignKey("Ahlatci.Shop.Domain.Entities.Customer", "AccountId")
+                        .HasForeignKey("Ahlatci.Shop.Domain.Entites.Customer", "AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("CUSTOMER_ACCOUNT_ACCOUNT_ID");
 
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.City", "City")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.City", "City")
                         .WithMany("Customers")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("CUSTOMER_CITY_CITY_ID");
+                        .HasConstraintName("CUSTOMER_CITY_ACCOUNT_ID");
 
                     b.Navigation("Account");
 
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Order", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Order", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Address", "Address")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Address", "Address")
                         .WithMany("Orders")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("ORDER_ADDRESS_ADDRESS_ID");
 
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Customer", "Customer")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -704,16 +697,16 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.OrderDetail", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.OrderDetail", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Order", "Order")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("ORDER_DETAIL_ORDER_ORDER_ID");
 
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Product", "Product")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -725,21 +718,20 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Product", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Category", "Category")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Catergory", "Catergory")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CatergoryId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("PRODUCT_CATEGORY_CATEGORY_ID");
+                        .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Catergory");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.ProductImage", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.ProductImage", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entities.Product", "Product")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -749,44 +741,44 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Account", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Account", b =>
                 {
                     b.Navigation("Customer")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Address", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Address", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Catergory", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.City", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.City", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("Address");
 
                     b.Navigation("Customers");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Customer", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Order", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Order", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("Ahlatci.Shop.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Product", b =>
                 {
-                    b.Navigation("Comments");
+                    b.Navigation("Comment");
 
                     b.Navigation("OrderDetails");
 

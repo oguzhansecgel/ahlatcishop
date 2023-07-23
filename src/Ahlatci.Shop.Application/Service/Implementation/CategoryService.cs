@@ -4,10 +4,15 @@ using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Application.Service.Implementation
 {
-	public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly AhlatciContext _context;
 
