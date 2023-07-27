@@ -2,8 +2,10 @@ using Ahlatci.Shop.Api.Filters;
 using Ahlatci.Shop.Application.AutoMappings;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Service.Implementation;
+using Ahlatci.Shop.Application.Validators;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Persistence.Context;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using static Ahlatci.Shop.Api.Filters.ExceptionHandleFilters;
@@ -42,7 +44,10 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 //Automapper
 builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 
- 
+//fluent validation
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(CreateCategoryValidator));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
