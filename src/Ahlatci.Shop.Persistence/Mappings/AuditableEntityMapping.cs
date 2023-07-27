@@ -30,6 +30,8 @@ namespace Ahlatci.Shop.Persistence.Mappings
 
 			builder.Property(x => x.CreatedBy)
 			   .HasColumnName("CREATE_BY")
+			   .HasColumnType("nvarchar(10)")
+			   .IsRequired(false)
 			   .HasColumnOrder(27);
 
 			builder.Property(x => x.ModifiedDate)
@@ -38,6 +40,8 @@ namespace Ahlatci.Shop.Persistence.Mappings
 
 			builder.Property(x => x.ModifiedBy)
 			   .HasColumnName("MODIFIED_BY")
+			   .HasColumnType("nvarchar(10)")
+			   .IsRequired(false)
 			   .HasColumnOrder(29);
 
 			builder.Property(x => x.IsDeleted)

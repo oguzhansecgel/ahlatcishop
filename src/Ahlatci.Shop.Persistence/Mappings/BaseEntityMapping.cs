@@ -12,9 +12,9 @@ namespace Ahlatci.Shop.Persistence.Mappings
 		{
 			builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
-       .HasColumnName("ID")
-       .HasColumnOrder(1)
-       .HasColumnType("int");
+			.HasColumnName("ID")
+			.HasColumnOrder(1)
+			.HasColumnType("int");
 
             ConfigureDerivedEntityMapping(builder);
 

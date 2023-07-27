@@ -1,5 +1,6 @@
 ﻿using Ahlatci.Shop.Application.Models.Dtos;
 using Ahlatci.Shop.Application.Models.RequestModels;
+using Ahlatci.Shop.Application.Wrapper;
 
 namespace Ahlatci.Shop.Application.Service.Abstract
 {
@@ -8,14 +9,14 @@ namespace Ahlatci.Shop.Application.Service.Abstract
         //Dto => servisin dışarıya gönderdiği türler
         //Viewmodel => servisin dışarıdan aldığı parametreler
         #region select
-        Task<List<CategoryDto>> GetAllCategories();
-        Task<CategoryDto> GetCategoryById(int id);
+        Task<Result<List<CategoryDto>>> GetAllCategories();
+        Task<Result<CategoryDto>> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
         #endregion
 
         #region Insert,update,delete
-        Task<int> CreateCategory(CreateCategoryViewModel createCategoryViewModel);
-        Task<int> UpdateCategory(UpdateCategoryViewModel updateCategoryViewModel);
-        Task<int> DeleteCategory(int id);
+        Task<Result<int>> CreateCategory(CreateCategoryViewModel createCategoryViewModel);
+        Task<Result<int>> UpdateCategory(UpdateCategoryViewModel updateCategoryViewModel);
+        Task<Result<int>> DeleteCategory(DeleteCategoryViewModel deleteCategoryViewModel);
         #endregion
 
     }
