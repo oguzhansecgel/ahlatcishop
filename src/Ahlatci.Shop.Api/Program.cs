@@ -1,12 +1,17 @@
-using Ahlatci.Shop.Api.Filters;
+﻿using Ahlatci.Shop.Api.Filters;
 using Ahlatci.Shop.Application.AutoMappings;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Service.Implementation;
 using Ahlatci.Shop.Application.Validators;
 using Ahlatci.Shop.Domain.Entites;
+using Ahlatci.Shop.Domain.Repositories;
+using Ahlatci.Shop.Domain.UWork;
 using Ahlatci.Shop.Persistence.Context;
+using Ahlatci.Shop.Persistence.Repositories;
+using Ahlatci.Shop.Persistence.UWork;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Reflection;
 using static Ahlatci.Shop.Api.Filters.ExceptionHandleFilters;
 
@@ -17,8 +22,8 @@ var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("appsettings.json")
         .Build();
- 
 
+ 
 // Add services to the container.
 
 //ActionFilter registiration
@@ -38,6 +43,10 @@ builder.Services.AddDbContext<AhlatciContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AhlatciShop"));
 });
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
+
 //Business Service Registiration
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
@@ -47,6 +56,9 @@ builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 //fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(CreateCategoryValidator));
 
+
+//unitofwork registiration
+builder.Services.AddScoped<IUnitWork, UnitWork>();
 
 var app = builder.Build();
 

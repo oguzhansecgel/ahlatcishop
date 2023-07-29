@@ -13,18 +13,19 @@ namespace Ahlatci.Shop.Api.Controllers
     [Route("category")]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
-   
-        public CategoryController(ICategoryService categoryService)
-        {
-            _categoryService = categoryService;
-        }
-        [HttpGet("GetALL")]
-        public async Task<ActionResult<Result<List<CategoryDto>>>> GetAllCategories()
-        {
-            var categories = await _categoryService.GetAllCategories();
-            return Ok(categories);
-        }
+		private readonly ICategoryService _categoryService;
+
+		public CategoryController(ICategoryService categoryService)
+		{
+			_categoryService = categoryService;
+		}
+
+		[HttpGet("get")]
+		public async Task<ActionResult<Result<List<CategoryDto>>>> GetAllCategories()
+		{
+			var categories = await _categoryService.GetAllCategories();
+			return Ok(categories);
+		}
 
 		[HttpGet("get/{id:int}")]
 		public async Task<ActionResult<Result<CategoryDto>>> GetCategoryById(int id)
