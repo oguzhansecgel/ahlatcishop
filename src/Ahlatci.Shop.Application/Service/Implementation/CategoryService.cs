@@ -70,8 +70,8 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			var result = new Result<int>();
 
 			var categoryEntity = _mapper.Map<CreateCategoryViewModel, Catergory>(createCategoryVM);
-			await _db.GetRepository<Catergory>().Add(categoryEntity);
-			await _db.CommitAsync();
+			_db.GetRepository<Catergory>().Add(categoryEntity);
+		  _db.CommitAsync();
 
 			result.Data = categoryEntity.Id;
 			return result;
@@ -91,8 +91,8 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 				throw new NotFoundException($"{deleteCategoryVM.Id} numaralı kategori bulunamadı.");
 			}
 
-			await _db.GetRepository<Catergory>().Delete(deleteCategoryVM.Id);
-			await _db.CommitAsync();
+			_db.GetRepository<Catergory>().Delete(deleteCategoryVM.Id);
+		 _db.CommitAsync();
 
 			result.Data = deleteCategoryVM.Id;
 			return result;
@@ -111,8 +111,8 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 			var updatedCategory = _mapper.Map<UpdateCategoryViewModel, Catergory>(updateCategoryVM);
 
-			await _db.GetRepository<Catergory>().Update(updatedCategory);
-			await _db.CommitAsync();
+			_db.GetRepository<Catergory>().Update(updatedCategory);
+			_db.CommitAsync();
 
 			result.Data = updatedCategory.Id;
 			return result;

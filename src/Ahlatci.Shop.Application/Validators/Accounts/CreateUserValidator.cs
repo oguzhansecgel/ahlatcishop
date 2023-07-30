@@ -60,6 +60,9 @@ namespace Ahlatci.Shop.Application.Validators.Accounts
 			   .NotEmpty().WithMessage("Parola tekrar bilgisi boş olamaz.")
 			   .MaximumLength(10).WithMessage("Parola tekrar bilgisi 10 karakter olabilir.");
 
+			RuleFor(x => x.Role)
+							.NotEmpty().WithMessage("Rol bilgisi boş geçilemez")
+							.IsInEnum().WithMessage("Rol bilgisi geçerli değil.(1-User veya 2-admin olabilir)");
 			RuleFor(x => x.Password)
 				.Matches(x => x.PasswordAgain).WithMessage("Parola ve parola tekrar bilgisi eşleşmiyor.");
 

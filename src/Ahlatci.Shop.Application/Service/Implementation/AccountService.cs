@@ -1,4 +1,5 @@
 ﻿using Ahlatci.Shop.Application.Behaviors;
+using Ahlatci.Shop.Application.Exceptions;
 using Ahlatci.Shop.Application.Models.RequestModels.Accounts;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Validators.Accounts;
@@ -30,6 +31,20 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 		[ValidationBehavior(typeof(CreateUserValidator))]
 		public async Task<bool> CreateUser(CreateUserViewModel createUserVM)
 		{
+			//aynı kullanıcı adı daha önce girilmiş mi _ 
+			var usernameExists = await _uWork.GetRepository<Account>().AnyAsync(x => x.Username.Trim().ToUpper() == createUserVM.Username.Trim().ToUpper());
+			if (usernameExists) 
+			{
+				throw new AllReadyExistException($"{createUserVM.Username} daha önce seçilmiştir. Farklı bir kullanıcı adı seçiniz.");
+			}
+
+			//aynı eposta adresi daha önce girilmiş mi _ 
+			var mailExist = await _uWork.GetRepository<Customer>().AnyAsync(x => x.Email.Trim().ToUpper() == createUserVM.Email.Trim().ToUpper());
+			if (mailExist)
+			{
+				throw new AllReadyExistException($"{createUserVM.Email} eposta adresi kullanımdadır.");
+			}
+
 			//gelen model customer türüne maplandi
 			var customerEntity = _mapper.Map<Customer>(createUserVM);
 			//gelen model account türüne maplandi
@@ -39,11 +54,21 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			   .EncryptString(_configuration["AppSettings:SecretKey"], accountEntity.Password);
 
 
-			await _uWork.GetRepository<Customer>().Add(customerEntity);
-			await _uWork.GetRepository<Account>().Add(accountEntity);
+			_uWork.GetRepository<Customer>().Add(customerEntity);
+			_uWork.GetRepository<Account>().Add(accountEntity);
+			accountEntity.Customer = customerEntity;
 
-			var result = await _uWork.CommitAsync();
-			return result;
+
+			var customerAccountCreateResult = await _uWork.CommitAsync();
+
+			if(customerAccountCreateResult)
+			{
+				accountEntity.CustomerId = customerEntity.Id;
+				var accountCustomerIdUdateResult =await _uWork.CommitAsync();
+				return customerAccountCreateResult;
+			}
+
+			return false;
 		}
 	}
 }

@@ -14,10 +14,10 @@ namespace Ahlatci.Shop.Domain.Repositories
 		Task<List<T>> GetByFilterAsync(Expression<Func<T, bool>> filter);
 		Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
 		Task<T> GetById(object id);
-		Task Add(T entity);
-		Task Delete(T entity);
-		Task Delete(object id);
-		Task Update(T entity);
+		 void Add(T entity);
+		void Delete(T entity);
+		void Delete(object id);
+		void Update(T entity);
 
 	}
 }

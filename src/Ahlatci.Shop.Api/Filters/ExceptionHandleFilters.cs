@@ -21,7 +21,13 @@ namespace Ahlatci.Shop.Api.Filters
                     //var notFoundException = context.Exception as NotFoundException;
                     result.Errors = new List<string> { notFoundException.Message };
                 }
-                else if (context.Exception is ValidateException validationException)
+                else if(context.Exception is AllReadyExistException allReadyExistException)
+                {
+					result.Errors = new List<string> { allReadyExistException.Message };
+
+
+				}
+				else if (context.Exception is ValidateException validationException)
                 {
                     result.Errors.AddRange(validationException.ErrorMessages);
                 }

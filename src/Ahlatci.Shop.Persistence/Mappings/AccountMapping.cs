@@ -29,10 +29,18 @@ namespace Ahlatci.Shop.Persistence.Mappings
 			builder.Property(x => x.LastUserIp)
 				.HasColumnType("nvarchar(50)")
 				.HasColumnName("LAST_LOGIN_IP")
+				.IsRequired(false)
 				.HasColumnOrder(6);
+			builder.Property(x=>x.Role)
+				.HasColumnName("ROLE_ID")
+				.HasColumnOrder (7);
+
+
 
 			builder.HasOne(x => x.Customer) //birden bire ilişki tablosu
-				.WithOne(x => x.Account);
+				.WithOne(x => x.Account)
+				.HasForeignKey<Account>(x=>x.CustomerId)
+				.HasConstraintName("ACCOUNT_CUSTOMER_CUSTOMER_ID");
 
 			builder.ToTable("ACCOUNTS");
 		}
