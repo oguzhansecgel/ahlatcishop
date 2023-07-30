@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ahlatci.Shop.Application.Models.RequestModels
+namespace Ahlatci.Shop.Application.Models.Dtos.Category
 {
-    public class UpdateCategoryViewModel
+    public class CategoryDto
     {
         public int Id { get; set; }
-        public string CatergoryName { get; set; }
+        public string Name { get; set; }
     }
 }

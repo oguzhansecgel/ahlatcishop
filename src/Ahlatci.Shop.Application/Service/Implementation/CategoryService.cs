@@ -1,9 +1,9 @@
 ﻿using Ahlatci.Shop.Application.Behaviors;
 using Ahlatci.Shop.Application.Exceptions;
-using Ahlatci.Shop.Application.Models.Dtos;
-using Ahlatci.Shop.Application.Models.RequestModels;
+using Ahlatci.Shop.Application.Models.Dtos.Category;
+using Ahlatci.Shop.Application.Models.RequestModels.Categories;
 using Ahlatci.Shop.Application.Service.Abstract;
-using Ahlatci.Shop.Application.Validators;
+using Ahlatci.Shop.Application.Validators.Categories;
 using Ahlatci.Shop.Application.Wrapper;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Domain.Repositories;
@@ -13,7 +13,7 @@ using AutoMapper;
 
 namespace Ahlatci.Shop.Application.Service.Implementation
 {
-	public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
 	{
 		private readonly IMapper _mapper;
 		private readonly IUnitWork _db;

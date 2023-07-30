@@ -2,7 +2,7 @@
 using Ahlatci.Shop.Application.AutoMappings;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Service.Implementation;
-using Ahlatci.Shop.Application.Validators;
+using Ahlatci.Shop.Application.Validators.Categories;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Domain.Repositories;
 using Ahlatci.Shop.Domain.UWork;
@@ -49,7 +49,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 //Business Service Registiration
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+builder.Services.AddScoped<IAccountService, AccountService>();
 //Automapper
 builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 

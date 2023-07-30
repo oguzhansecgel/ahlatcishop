@@ -1,5 +1,5 @@
-using Ahlatci.Shop.Application.Models.Dtos;
-using Ahlatci.Shop.Application.Models.RequestModels;
+using Ahlatci.Shop.Application.Models.Dtos.Category;
+using Ahlatci.Shop.Application.Models.RequestModels.Categories;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Wrapper;
 using Microsoft.AspNetCore.Mvc;

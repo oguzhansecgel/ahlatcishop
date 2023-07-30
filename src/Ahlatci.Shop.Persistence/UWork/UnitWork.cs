@@ -56,6 +56,37 @@ namespace Ahlatci.Shop.Persistence.UWork
 
 
 		}
+		#region Dispose
+
+		bool _disposed = false;
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (_disposed)
+			{
+				return;
+			}
+
+			if (disposing)
+			{
+				//.Net objelerini kaldır.
+				_context.Dispose();
+			}
+
+			//Kullanılan harici dil kütüphaneleri (.Net ile yazılmamış external kütüphaneler)
+			//Örneğin görüntü işlemi için kullanılacak bir C++ kütüphanesini bellekten at
+
+			_disposed = true;
+		}
+
+		#endregion
+
 
 	}
 }

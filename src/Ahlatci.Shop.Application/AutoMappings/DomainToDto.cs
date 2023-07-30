@@ -1,4 +1,4 @@
-﻿using Ahlatci.Shop.Application.Models.Dtos;
+﻿using Ahlatci.Shop.Application.Models.Dtos.Category;
 using Ahlatci.Shop.Domain.Entites;
 using AutoMapper;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Application.AutoMappings
 {
-	public class DomainToDto : Profile
+    public class DomainToDto : Profile
 	{
 		public DomainToDto()
 		{
