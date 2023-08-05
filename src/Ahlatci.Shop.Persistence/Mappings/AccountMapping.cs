@@ -25,6 +25,7 @@ namespace Ahlatci.Shop.Persistence.Mappings
 				.HasColumnOrder(4);
 			builder.Property(x => x.LastLoginDate)
 				.HasColumnName("LAST_LOGIN_DATE")
+				.IsRequired(false)
 				.HasColumnOrder(5);
 			builder.Property(x => x.LastUserIp)
 				.HasColumnType("nvarchar(50)")
@@ -34,8 +35,6 @@ namespace Ahlatci.Shop.Persistence.Mappings
 			builder.Property(x=>x.Role)
 				.HasColumnName("ROLE_ID")
 				.HasColumnOrder (7);
-
-
 
 			builder.HasOne(x => x.Customer) //birden bire ilişki tablosu
 				.WithOne(x => x.Account)

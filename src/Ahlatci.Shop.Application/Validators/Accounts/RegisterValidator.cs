@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Application.Validators.Accounts
 {
-	public class CreateUserValidator : AbstractValidator<CreateUserViewModel>
+	public class RegisterValidator : AbstractValidator<RegisterVM>
 	{
-		public CreateUserValidator()
+		public RegisterValidator()
 		{
 			RuleFor(x => x.CityId)
 				.NotEmpty().WithMessage("Geçerli bir il bilgisi gönderilmelidir.")
@@ -59,10 +59,6 @@ namespace Ahlatci.Shop.Application.Validators.Accounts
 			RuleFor(x => x.PasswordAgain)
 			   .NotEmpty().WithMessage("Parola tekrar bilgisi boş olamaz.")
 			   .MaximumLength(10).WithMessage("Parola tekrar bilgisi 10 karakter olabilir.");
-
-			RuleFor(x => x.Role)
-							.NotEmpty().WithMessage("Rol bilgisi boş geçilemez")
-							.IsInEnum().WithMessage("Rol bilgisi geçerli değil.(1-User veya 2-admin olabilir)");
 			RuleFor(x => x.Password)
 				.Matches(x => x.PasswordAgain).WithMessage("Parola ve parola tekrar bilgisi eşleşmiyor.");
 

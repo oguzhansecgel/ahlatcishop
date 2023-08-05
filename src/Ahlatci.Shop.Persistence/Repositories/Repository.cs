@@ -30,13 +30,17 @@ namespace Ahlatci.Shop.Persistence.Repositories
 		public async Task<List<T>> GetByFilterAsync(Expression<Func<T, bool>> filter)
 		{
 			return await _dbSet.Where(filter).ToListAsync();
+			
 		}
 
 		public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
 		{
 			return await _dbSet.AnyAsync(filter);
 		}
-
+		public async Task<T> GetSingleByFilterAsync(Expression<Func<T, bool>> filter)
+		{
+			return await _dbSet.FirstOrDefaultAsync(filter);
+		}
 		public async Task<T> GetById(object id)
 		{
 			var entity = await _dbSet.FindAsync(id);
@@ -66,5 +70,7 @@ namespace Ahlatci.Shop.Persistence.Repositories
 			var item = _dbSet.Find(id);
 			_dbSet.Remove(item);
 		}
+
+
 	}
 }

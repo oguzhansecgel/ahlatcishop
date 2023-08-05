@@ -1,4 +1,6 @@
-﻿using Ahlatci.Shop.Application.Models.Dtos.Category;
+﻿using Ahlatci.Shop.Application.Models.Dtos.Accounts;
+using Ahlatci.Shop.Application.Models.Dtos.Category;
+using Ahlatci.Shop.Application.Models.Dtos.Customers;
 using Ahlatci.Shop.Domain.Entites;
 using AutoMapper;
 using System;
@@ -14,6 +16,8 @@ namespace Ahlatci.Shop.Application.AutoMappings
 		public DomainToDto()
 		{
 			CreateMap<Catergory, CategoryDto>();
+			CreateMap<Customer, CustomerDto>();
+			CreateMap<Account, AccountDto>();
 		}
 	}
 }

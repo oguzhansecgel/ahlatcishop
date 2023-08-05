@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Application.Models.RequestModels.Accounts
 {
-	public class CreateUserViewModel
+	public class RegisterVM
 	{
 
 		public int CityId { get; set; }
@@ -21,6 +21,6 @@ namespace Ahlatci.Shop.Application.Models.RequestModels.Accounts
 		public string Username { get; set; }
 		public string Password { get; set; }
 		public string PasswordAgain { get; set; }
-		public Roles Role { get; set; }
+
 	}
 }

@@ -23,9 +23,10 @@ namespace Ahlatci.Shop.Application.AutoMappings
 				.ForMember(x => x.Name, y => y.MapFrom(e => e.CatergoryName));
 
 			//Kullanıcı oluşturma isteği
-			CreateMap<CreateUserViewModel, Customer>();
-			CreateMap<CreateUserViewModel, Account>();
-				
+			CreateMap<RegisterVM, Customer>();
+			CreateMap<RegisterVM, Account>()
+				.ForMember(x => x.Role, y => y.MapFrom(e => Roles.User));
+			
 
 		}
 	}

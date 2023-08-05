@@ -10,9 +10,12 @@ using Ahlatci.Shop.Persistence.Context;
 using Ahlatci.Shop.Persistence.Repositories;
 using Ahlatci.Shop.Persistence.UWork;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Reflection;
+using System.Text;
 using static Ahlatci.Shop.Api.Filters.ExceptionHandleFilters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +38,11 @@ builder.Services.AddControllers(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+	//githubdan alınacak
+
+});
 
 //DbContext Registiration
 builder.Services.AddDbContext<AhlatciContext>(opt =>
@@ -55,7 +62,20 @@ builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 
 //fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(CreateCategoryValidator));
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+		   .AddJwtBearer(options =>
+		   {
+			   options.TokenValidationParameters = new TokenValidationParameters
+			   {
+				   ValidateIssuer = true,
+				   ValidateAudience = true,
+				   ValidateLifetime = true,
+				   ValidateIssuerSigningKey = true,
+				   ValidIssuer = builder.Configuration["Jwt:Issuer"], // JWT üreten tarafın adı
+				   ValidAudience = builder.Configuration["Jwt:Audiance"], // JWT'nin kullanılacağı alan adı
+				   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigninKey"])) // Gizli anahtar
+			   };
+		   });
 
 //unitofwork registiration
 builder.Services.AddScoped<IUnitWork, UnitWork>();
@@ -70,6 +90,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
