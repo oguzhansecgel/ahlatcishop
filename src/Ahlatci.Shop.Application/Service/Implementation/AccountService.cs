@@ -78,6 +78,7 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 		}
 
 
+
 		public async Task<Result<TokenDto>> Login(LoginViewModel loginViewModel)
 		{
 			var result = new Result<TokenDto>();
@@ -113,8 +114,27 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 			return result;
 		}
-		//githubdan çekilecek
-		private string GenerateJwtToken(Account account,Customer customer ,DateTime expireDate)
+		
+
+
+		[ValidationBehavior(typeof(UpdateUserValidator))]
+		public async Task<Result<bool>> UpdateUser(UpdateUserVM updateUserVM)
+		{
+			var result = new Result<bool>();
+
+			var existCustomer = await _uWork.GetRepository<Customer>().GetById(updateUserVM.Id.Value);
+
+			_mapper.Map(updateUserVM,existCustomer);
+
+			_uWork.GetRepository<Customer>().Update(existCustomer);
+
+			result.Data= await _uWork.CommitAsync();
+			return result;
+		}
+
+
+
+		private string GenerateJwtToken(Account account, Customer customer, DateTime expireDate)
 		{
 			var secretKey = _configuration["Jwt:SigninKey"];
 			var issuer = _configuration["Jwt:Issuer"];
@@ -123,12 +143,13 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			var claims = new Claim[]
 			{
 				new Claim(ClaimTypes.Role,((int)account.Role).ToString()),
-				new Claim("Username",account.Username),
-				new Claim("Email",customer.Email)
+				new Claim(ClaimTypes.Name,account.Username),
+				new Claim(ClaimTypes.Email,customer.Email),
+				new Claim(ClaimTypes.Sid,customer.Id.ToString())
 			};
 
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes(secretKey);
+			var key = Encoding.UTF8.GetBytes(secretKey);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Audience = audiance,

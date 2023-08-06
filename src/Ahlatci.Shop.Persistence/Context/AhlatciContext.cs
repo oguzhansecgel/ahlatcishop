@@ -1,13 +1,21 @@
-﻿using Ahlatci.Shop.Domain.Common;
+﻿using Ahlatci.Shop.Application.Service.Abstract;
+using Ahlatci.Shop.Domain.Common;
 using Ahlatci.Shop.Domain.Entites;
+using Ahlatci.Shop.Domain.Service.Abstract;
 using Ahlatci.Shop.Persistence.Mappings;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Ahlatci.Shop.Persistence.Context
 {
 	public class AhlatciContext : DbContext
 	{
-		public AhlatciContext(DbContextOptions<AhlatciContext> options) : base(options) { }
+		private readonly ILoggedUserService _loggedUserService;
+		public AhlatciContext(DbContextOptions<AhlatciContext> options, ILoggedUserService loggedUserService) : base(options)
+		{
+			_loggedUserService = loggedUserService;
+		}
 		#region DbSet
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<Address> Addresses { get; set; }
@@ -58,16 +66,16 @@ namespace Ahlatci.Shop.Persistence.Context
 				{
 					case EntityState.Modified:
 						entry.Entity.ModifiedDate=DateTime.Now;
-						entry.Entity.ModifiedBy = "admin";
+						entry.Entity.ModifiedBy = _loggedUserService.UserName ?? "admin";
 						break;
 					case EntityState.Added:
 						entry.Entity.CreateDate = DateTime.Now;
-						entry.Entity.CreatedBy = "admin";
+						entry.Entity.CreatedBy = _loggedUserService.UserName ?? "admin";
 						break;
 
 					case EntityState.Deleted:
 						entry.Entity.ModifiedDate = DateTime.Now;
-						entry.Entity.ModifiedBy = "admin";
+						entry.Entity.ModifiedBy = _loggedUserService.UserName ?? "admin";
 						entry.Entity.IsDeleted = true;
 						entry.State= EntityState.Modified;
 						break;

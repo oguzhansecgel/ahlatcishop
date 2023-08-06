@@ -13,5 +13,7 @@ namespace Ahlatci.Shop.Application.Service.Abstract
     {
 		Task<bool> Register(RegisterVM createUserVM);
 		Task<Result<TokenDto>> Login(LoginViewModel loginViewModel);
+
+		Task<Result<bool>> UpdateUser(UpdateUserVM updateUserVM);
 	}
 }

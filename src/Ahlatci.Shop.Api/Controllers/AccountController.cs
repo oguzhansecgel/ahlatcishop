@@ -11,6 +11,8 @@ namespace Ahlatci.Shop.Api.Controllers
 {
 	[ApiController]
 	[Route("account")]
+	[Authorize]
+
 	public class AccountController : ControllerBase
 	{
 		private readonly IAccountService _accountService;
@@ -22,13 +24,14 @@ namespace Ahlatci.Shop.Api.Controllers
 
 
 		[HttpPost("register")]
-		[Authorize]
-
+		[AllowAnonymous]
 		public async Task<ActionResult<Result<int>>> Register(RegisterVM createUserVM)
 		{
 			var result = await _accountService.Register(createUserVM);
 			return Ok(result);
 		}
+
+
 		[HttpPost("login")]
 		[AllowAnonymous]
 		public async Task<ActionResult<Result<int>>> Login(LoginViewModel loginViewModel)
@@ -36,6 +39,19 @@ namespace Ahlatci.Shop.Api.Controllers
 			var result = await _accountService.Login(loginViewModel);
 			return Ok(result);
 		}
+
+
+		[HttpPut("update")]
+		public async Task<ActionResult<Result<int>>> UpdateUser(int ? id,UpdateUserVM updateUserVM)
+		{
+			if(id!=updateUserVM.Id)
+			{
+				return BadRequest();
+			}
+			var result = await _accountService.UpdateUser(updateUserVM);
+			return Ok(result);
+		}
+
 
 	}
 }
