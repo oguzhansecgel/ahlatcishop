@@ -52,20 +52,21 @@ builder.Services.AddSwaggerGen(c =>
 	});
 
 	c.AddSecurityRequirement(new OpenApiSecurityRequirement
-{
-{
-new OpenApiSecurityScheme
-{
-Reference = new OpenApiReference
-{
-Type = ReferenceType.SecurityScheme,
-Id = "Bearer"
-}
-},
-new string[] {}
-}
+				{
+					{
+						new OpenApiSecurityScheme
+							{
+								Reference = new OpenApiReference
+								{
+									Type = ReferenceType.SecurityScheme,
+									Id = "Bearer"
+								}
+							},
+							new string[] {}
+					}
+				});
 });
-});
+
 builder.Services.AddHttpContextAccessor();
 //DbContext Registiration
 builder.Services.AddDbContext<AhlatciContext>(opt =>
@@ -82,6 +83,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 //Automapper
 builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 

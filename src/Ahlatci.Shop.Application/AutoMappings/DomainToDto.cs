@@ -2,6 +2,7 @@
 using Ahlatci.Shop.Application.Models.Dtos.Category;
 using Ahlatci.Shop.Application.Models.Dtos.Cities;
 using Ahlatci.Shop.Application.Models.Dtos.Customers;
+using Ahlatci.Shop.Application.Models.Dtos.Products;
 using Ahlatci.Shop.Domain.Entites;
 using AutoMapper;
 using System;
@@ -20,6 +21,7 @@ namespace Ahlatci.Shop.Application.AutoMappings
 			CreateMap<Customer, CustomerDto>();
 			CreateMap<Account, AccountDto>();
 			CreateMap<City, CityDto>();
+			CreateMap<Product, ProductDto>();
 		}
 	}
 }

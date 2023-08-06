@@ -4,20 +4,21 @@ using Ahlatci.Shop.Application.Wrapper;
 
 namespace Ahlatci.Shop.Application.Service.Abstract
 {
-    public interface ICategoryService
-    {
-        //Dto => servisin dışarıya gönderdiği türler
-        //Viewmodel => servisin dışarıdan aldığı parametreler
-        #region select
-        Task<Result<List<CategoryDto>>> GetAllCategories();
-        Task<Result<CategoryDto>> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
-        #endregion
+	public interface ICategoryService
+	{
+		//Dto => servisin dışarıya gönderdiği türler
+		//Viewmodel => servisin dışarıdan aldığı parametreler
+		#region select
+		Task<Result<List<CategoryDto>>> GetAllCategories();
+		Task<Result<CategoryDto>> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
 
-        #region Insert,update,delete
-        Task<Result<int>> CreateCategory(CreateCategoryViewModel createCategoryViewModel);
-        Task<Result<int>> UpdateCategory(UpdateCategoryViewModel updateCategoryViewModel);
-        Task<Result<int>> DeleteCategory(DeleteCategoryViewModel deleteCategoryViewModel);
-        #endregion
+		#endregion
 
-    }
+		#region Insert, Update, Delete
+		Task<Result<int>> CreateCategory(CreateCategoryViewModel createCategoryVM);
+		Task<Result<int>> UpdateCategory(UpdateCategoryViewModel updateCategoryVM);
+		Task<Result<int>> DeleteCategory(DeleteCategoryViewModel deleteCategoryVM);
+		#endregion
+
+	}
 }

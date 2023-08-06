@@ -20,11 +20,9 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 		public CategoryService(IMapper mapper, IUnitWork db)
 		{
-			_db = db;
 			_mapper = mapper;
+			_db = db;
 		}
-
-		//Automapper : Bir modeli başka bir modele çevirmek için kullanılıyor.
 
 		[PerformanceBehavior]
 		public async Task<Result<List<CategoryDto>>> GetAllCategories()
@@ -51,15 +49,12 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 				throw new NotFoundException($"{getCategoryByIdVM.Id} numaralı kategori bulunamadı.");
 			}
 
-			//var categoryDto = await _context.Categories
-			//    .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
-			//    .FirstOrDefaultAsync(x => x.Id == getCategoryByIdVM.Id);
-
 			var categoryEntity = await _db.GetRepository<Catergory>().GetById(getCategoryByIdVM.Id);
 
 			var categoryDto = _mapper.Map<Catergory, CategoryDto>(categoryEntity);
 
 			result.Data = categoryDto;
+
 			return result;
 		}
 
@@ -70,10 +65,12 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			var result = new Result<int>();
 
 			var categoryEntity = _mapper.Map<CreateCategoryViewModel, Catergory>(createCategoryVM);
+
 			_db.GetRepository<Catergory>().Add(categoryEntity);
-		    _db.CommitAsync();
+			await _db.CommitAsync();
 
 			result.Data = categoryEntity.Id;
+
 			return result;
 		}
 
@@ -83,8 +80,6 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 		{
 			var result = new Result<int>();
 
-			//Gönderilen id bilgisine karşılık gelen bir kategori var mı?
-			//var categoryExists = await _context.Categories.AnyAsync(x => x.Id == deleteCategoryVM.Id);
 			var categoryExists = await _db.GetRepository<Catergory>().AnyAsync(x => x.Id == deleteCategoryVM.Id);
 			if (!categoryExists)
 			{
@@ -92,32 +87,36 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			}
 
 			_db.GetRepository<Catergory>().Delete(deleteCategoryVM.Id);
-		 _db.CommitAsync();
+			await _db.CommitAsync();
 
 			result.Data = deleteCategoryVM.Id;
+
 			return result;
 		}
+
 
 		[ValidationBehavior(typeof(UpdateCategoryValidator))]
 		public async Task<Result<int>> UpdateCategory(UpdateCategoryViewModel updateCategoryVM)
 		{
 			var result = new Result<int>();
 
-			var categoryExists = await _db.GetRepository<Catergory>().AnyAsync(x => x.Id == updateCategoryVM.Id);
-			if (!categoryExists)
+			var existsCategory = await _db.GetRepository<Catergory>().GetById(updateCategoryVM.Id);
+			if (existsCategory is null)
 			{
 				throw new Exception($"{updateCategoryVM} numaralı kategori bulunamadı.");
 			}
 
-			var updatedCategory = _mapper.Map<UpdateCategoryViewModel, Catergory>(updateCategoryVM);
+			//var updateCategory = _mapper.Map<UpdateCategoryVM,Category>(updateCategoryVM);
+
+			var updatedCategory = _mapper.Map(updateCategoryVM, existsCategory);
 
 			_db.GetRepository<Catergory>().Update(updatedCategory);
-			_db.CommitAsync();
+			await _db.CommitAsync();
 
 			result.Data = updatedCategory.Id;
+
 			return result;
 		}
-
 		//
 	}
 }
