@@ -10,7 +10,7 @@ namespace Ahlatci.Shop.Domain.Service.Abstract
 	public interface ILoggedUserService
 	{
 		int? UserId { get; }
-		Roles Role { get; }
+		Roles? Role { get; }
 		string UserName { get; }
 		string Email { get; }
 

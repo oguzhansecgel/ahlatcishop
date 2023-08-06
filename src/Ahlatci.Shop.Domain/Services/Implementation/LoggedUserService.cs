@@ -16,7 +16,7 @@ namespace Ahlatci.Shop.Domain.Service.Implementation
 
 		public int? UserId => GetClaim(ClaimTypes.Sid)!=null ? int.Parse(GetClaim(ClaimTypes.Sid)): null;
 
-		public Roles Role => GetClaim(ClaimTypes.Sid)!=null ? (Roles)Enum.Parse(typeof(Roles),GetClaim(ClaimTypes.Role)): null;
+		public Roles? Role => GetClaim(ClaimTypes.Role) != null ? (Roles)Enum.Parse(typeof(Roles), GetClaim(ClaimTypes.Role)) : null;
 
 		public string UserName => GetClaim(ClaimTypes.Name) != null ? GetClaim(ClaimTypes.Name):null;
 

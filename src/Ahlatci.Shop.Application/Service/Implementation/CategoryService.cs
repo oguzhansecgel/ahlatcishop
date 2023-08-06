@@ -71,7 +71,7 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 			var categoryEntity = _mapper.Map<CreateCategoryViewModel, Catergory>(createCategoryVM);
 			_db.GetRepository<Catergory>().Add(categoryEntity);
-		  _db.CommitAsync();
+		    _db.CommitAsync();
 
 			result.Data = categoryEntity.Id;
 			return result;

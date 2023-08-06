@@ -1,4 +1,4 @@
-﻿using Ahlatci.Shop.Application.Service.Abstract;
+﻿
 using Ahlatci.Shop.Domain.Common;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Domain.Service.Abstract;
@@ -60,6 +60,7 @@ namespace Ahlatci.Shop.Persistence.Context
 		public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
 		{ // herhangi bir kayıt işleminde yapılan işlem ekleme ise createdate ve createdby bilgileri otomatik olarak set edilir.
           // herhangi bir güncelleme işleminde yapılan işlem ekleme ise ModifiedDate ve ModifiedBy bilgileri otomatik olarak set edilir.
+
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())
             {
 				switch (entry.State)
@@ -81,6 +82,14 @@ namespace Ahlatci.Shop.Persistence.Context
 						break;
 					default:
 						break;
+				}
+			}
+			foreach (var entry in ChangeTracker.Entries<BaseEntity>().ToList())
+			{
+				if(entry.State == EntityState.Deleted)
+				{
+					entry.Entity.IsDeleted = true;
+					entry.State = EntityState.Modified;
 				}
 			}
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);

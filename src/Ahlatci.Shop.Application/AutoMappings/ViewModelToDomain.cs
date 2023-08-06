@@ -1,5 +1,6 @@
 ﻿using Ahlatci.Shop.Application.Models.RequestModels.Accounts;
 using Ahlatci.Shop.Application.Models.RequestModels.Categories;
+using Ahlatci.Shop.Application.Models.RequestModels.Cities;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Utils;
 using AutoMapper;
@@ -28,6 +29,11 @@ namespace Ahlatci.Shop.Application.AutoMappings
 				.ForMember(x => x.Role, y => y.MapFrom(e => Roles.User));
 
 			CreateMap<UpdateUserVM, Customer>();
+
+
+			CreateMap<CreateCityVM, City>()
+				.ForMember(x => x.Name, y => y.MapFrom(e => e.Name.ToUpper()));
+			CreateMap<UpdateCityVM, City>().ForMember(x => x.Name, y => y.MapFrom(e => e.Name.ToUpper()));
 		}
 	}
 }

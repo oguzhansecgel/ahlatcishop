@@ -1,9 +1,7 @@
-﻿using Ahlatci.Shop.Api.Filters;
-using Ahlatci.Shop.Application.AutoMappings;
+﻿using Ahlatci.Shop.Application.AutoMappings;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Service.Implementation;
 using Ahlatci.Shop.Application.Validators.Categories;
-using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Domain.Repositories;
 using Ahlatci.Shop.Domain.Service.Abstract;
 using Ahlatci.Shop.Domain.Service.Implementation;
@@ -16,8 +14,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using System.Reflection;
 using System.Text;
 using static Ahlatci.Shop.Api.Filters.ExceptionHandleFilters;
 
@@ -70,7 +66,6 @@ new string[] {}
 }
 });
 });
-
 builder.Services.AddHttpContextAccessor();
 //DbContext Registiration
 builder.Services.AddDbContext<AhlatciContext>(opt =>
@@ -86,6 +81,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
+builder.Services.AddScoped<ICityService, CityService>();
 //Automapper
 builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 
