@@ -8,7 +8,7 @@ namespace Ahlatci.Shop.Application.Models.Dtos.Products
 {
 	public class ProductDto
 	{
-		public int CatId { get; set; }
+		public int CategoryId { get; set; }
 		public string Name { get; set; }
 		public string Detail { get; set; }
 		public int UnitInStock { get; set; }

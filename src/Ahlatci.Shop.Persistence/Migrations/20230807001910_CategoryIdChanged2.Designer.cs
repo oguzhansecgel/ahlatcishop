@@ -4,6 +4,7 @@ using Ahlatci.Shop.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ahlatci.Shop.Persistence.Migrations
 {
     [DbContext(typeof(AhlatciContext))]
-    partial class AhlatciContextModelSnapshot : ModelSnapshot
+    [Migration("20230807001910_CategoryIdChanged2")]
+    partial class CategoryIdChanged2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -503,6 +506,9 @@ namespace Ahlatci.Shop.Persistence.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CatergoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -536,7 +542,7 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CatergoryId");
 
                     b.ToTable("Products");
                 });
@@ -707,13 +713,13 @@ namespace Ahlatci.Shop.Persistence.Migrations
 
             modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.Product", b =>
                 {
-                    b.HasOne("Ahlatci.Shop.Domain.Entites.Catergory", "Category")
+                    b.HasOne("Ahlatci.Shop.Domain.Entites.Catergory", "Catergory")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CatergoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Catergory");
                 });
 
             modelBuilder.Entity("Ahlatci.Shop.Domain.Entites.ProductImage", b =>

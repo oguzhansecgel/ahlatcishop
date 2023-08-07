@@ -56,6 +56,8 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			await _uwork.CommitAsync();
 			result.Data = productEntity.Id;
 			return result;
+ 
+
 		}
 
 		public async Task<Result<bool>> DeleteProduct(int? id)
@@ -77,13 +79,8 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 		{
 			var result = new Result<bool>();
 
-			var productIdExists = await _uwork.GetRepository<Product>().AnyAsync(x => x.Id == updateProductVM.CatId);
-			if (!productIdExists)
-			{
-				throw new NotFoundException($"{updateProductVM.CatId} numaralı şehir bulunamadı.");
-			}
 
-			var existsProductEntity = await _uwork.GetRepository<Product>().GetById(updateProductVM.CatId);
+			var existsProductEntity = await _uwork.GetRepository<Product>().GetById(updateProductVM.Id);
 
 			_mapper.Map(updateProductVM, existsProductEntity);
 

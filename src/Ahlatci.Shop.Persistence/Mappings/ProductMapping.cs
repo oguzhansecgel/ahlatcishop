@@ -14,32 +14,32 @@ namespace Ahlatci.Shop.Persistence.Mappings
 	{
 		public override void ConfigureDerivedEntityMapping(EntityTypeBuilder<Product> builder)
 		{
-			builder.Property(x => x.CatId)
-				.HasColumnName("CATERGORY_ID")
-				.HasColumnOrder(2);
+			builder.Property(x => x.CategoryId)
+			   .HasColumnName("CATEGORY_ID")
+			   .HasColumnOrder(2);
 
 			builder.Property(x => x.Name)
 				.HasColumnName("NAME")
 				.HasColumnType("nvarchar(255)")
 				.HasColumnOrder(3);
 
+			builder.Property(x => x.Detail)
+			   .HasColumnName("DETAIL")
+			   .HasColumnType("nvarchar(max)")
+			   .HasColumnOrder(4);
+
 			builder.Property(x => x.UnitInStock)
-				.HasColumnName("UNIT_IN_STOCK")
-				.HasColumnOrder(4);
+			   .HasColumnName("UNIT_IN_STOCK")
+			   .HasColumnOrder(5);
 
 			builder.Property(x => x.UnitPrice)
-					.HasColumnName("UNIT_PRICE")
-					.HasColumnOrder(5);
+			   .HasColumnName("UNIT_PRICE")
+			   .HasColumnOrder(6);
 
-			builder.Property(x => x.Detail)
-					.HasColumnName("DETAIL")
-					.HasColumnType("nvarchar(max)")
-					.HasColumnOrder(6);
-
-			builder.HasOne(x => x.Catergory)
+			builder.HasOne(x => x.Category)
 				.WithMany(x => x.Products)
-				.HasForeignKey(x => x.CatId)
-				.HasConstraintName("PRODUCT_CATERGORY_CATERGORY_ID");
+				.HasForeignKey(x => x.CategoryId)
+				.HasConstraintName("PRODUCT_CATEGORY_CATEGORY_ID");
 
 			builder.ToTable("PRODUCTS");
 

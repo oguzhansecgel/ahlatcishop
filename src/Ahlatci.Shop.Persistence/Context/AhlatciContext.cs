@@ -72,6 +72,7 @@ namespace Ahlatci.Shop.Persistence.Context
 					case EntityState.Added:
 						entry.Entity.CreateDate = DateTime.Now;
 						entry.Entity.CreatedBy = _loggedUserService.UserName ?? "admin";
+						entry.Entity.ModifiedBy = _loggedUserService.UserName ?? "admin";
 						break;
 
 					case EntityState.Deleted:

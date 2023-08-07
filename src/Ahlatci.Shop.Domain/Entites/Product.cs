@@ -14,14 +14,14 @@ namespace Ahlatci.Shop.Domain.Entites
     public class Product : AuditableEntity
     {
         
-        public int CatId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public string Detail { get; set; }
         public int UnitInStock { get; set; }
         public Decimal UnitPrice{ get; set; }
 
         //navigation property
-        public Catergory Catergory { get; set; }
+        public Catergory Category { get; set; }
 
         public ICollection<ProductImage> ProductImages { get; set;}
         public ICollection<OrderDetail> OrderDetails { get; set; }

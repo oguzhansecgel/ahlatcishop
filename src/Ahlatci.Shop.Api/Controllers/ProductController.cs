@@ -42,7 +42,7 @@ namespace Ahlatci.Shop.Api.Controllers
 		[HttpPut("update/{id:int}")]
 		public async Task<ActionResult<Result<int>>> UpdateProduct(int id, UpdateProductVM updateProductVM)
 		{
-			if (id != updateProductVM.CatId)
+			if (id != updateProductVM.Id)
 			{
 				return BadRequest();
 			}
