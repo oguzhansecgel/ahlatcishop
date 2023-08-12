@@ -13,6 +13,6 @@ namespace Ahlatci.Shop.Application.Models.RequestModels.Products
 		public string Name { get; set; }
 		public string Detail { get; set; }
 		public int UnitInStock { get; set; }
-		public Decimal UnitPrice { get; set; }
+		public decimal UnitPrice { get; set; }
 	}
 }

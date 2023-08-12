@@ -14,7 +14,7 @@ namespace Ahlatci.Shop.Application.Validators.Products
         {
 			RuleFor(x => x.Name)
 			   .NotNull().WithMessage("Ürün Adı Boş Olamaz")
-			   .MaximumLength(50).WithMessage("Ürün adı 50 karakterden büyük olamaz");
+			   .MaximumLength(255).WithMessage("Ürün adı 255 karakterden büyük olamaz");
 			RuleFor(x => x.Detail)
 			   .NotNull().WithMessage("Ürün Detayı Boş Olamaz")
 			   .MaximumLength(250).WithMessage("Ürün Detayı 250 karakterden büyük olamaz");

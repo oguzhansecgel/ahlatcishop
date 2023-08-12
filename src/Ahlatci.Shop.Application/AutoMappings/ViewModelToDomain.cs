@@ -1,6 +1,7 @@
 ﻿using Ahlatci.Shop.Application.Models.RequestModels.Accounts;
 using Ahlatci.Shop.Application.Models.RequestModels.Categories;
 using Ahlatci.Shop.Application.Models.RequestModels.Cities;
+using Ahlatci.Shop.Application.Models.RequestModels.ProductImages;
 using Ahlatci.Shop.Application.Models.RequestModels.Products;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Utils;
@@ -38,7 +39,10 @@ namespace Ahlatci.Shop.Application.AutoMappings
 
 			CreateMap<CreateProductVM, Product>();
 			CreateMap<UpdateProductVM, Product>();
+			CreateMap<DeleteProductVM, Product>();
 
+
+			CreateMap<CreateProductImageVM, ProductImage>();
 			
 
 		}

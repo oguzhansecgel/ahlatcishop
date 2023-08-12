@@ -1,9 +1,12 @@
-﻿using Ahlatci.Shop.Application.Exceptions;
+﻿using Ahlatci.Shop.Application.Behaviors;
+using Ahlatci.Shop.Application.Exceptions;
 using Ahlatci.Shop.Application.Models.Dtos.Cities;
 using Ahlatci.Shop.Application.Models.Dtos.Products;
 using Ahlatci.Shop.Application.Models.RequestModels.Cities;
 using Ahlatci.Shop.Application.Models.RequestModels.Products;
 using Ahlatci.Shop.Application.Service.Abstract;
+using Ahlatci.Shop.Application.Validators.Categories;
+using Ahlatci.Shop.Application.Validators.Products;
 using Ahlatci.Shop.Application.Wrapper;
 using Ahlatci.Shop.Domain.Entites;
 using Ahlatci.Shop.Domain.UWork;
@@ -36,7 +39,13 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 			return result;
 		}
 
-		public async Task<Result<ProductDto>> GetProductById(int id)
+
+        public Task<Result<List<ProductWithCategoryDto>>> GetAllProductsWithCategory()
+        {
+			//gi
+            throw new NotImplementedException();
+        }
+        public async Task<Result<ProductDto>> GetProductById(int id)
 		{
 			var result = new Result<ProductDto>();
 			var productEntity = await _uwork.GetRepository<Product>().GetById(id);
@@ -47,11 +56,19 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 			return result;
 		}
+        [ValidationBehavior(typeof(CreateProductValidator))]
 
-		public async Task<Result<int>> CreateProduct(CreateProductVM createProductVM)
+        public async Task<Result<int>> CreateProduct(CreateProductVM createProductVM)
 		{
 			var result = new Result<int>();
 			var productEntity = _mapper.Map<Product>(createProductVM);
+			var categoryById = await _uwork.GetRepository<Catergory>().GetById(createProductVM.CategoryId);
+			if(categoryById == null)
+			{
+				throw new NotFoundException($"{createProductVM.CategoryId} numaralı category bulunamadı.");
+
+			}
+
 			_uwork.GetRepository<Product>().Add(productEntity);
 			await _uwork.CommitAsync();
 			result.Data = productEntity.Id;
@@ -89,5 +106,6 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 
 			return result;
 		}
-	}
+
+    }
 }

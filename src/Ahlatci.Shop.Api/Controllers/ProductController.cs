@@ -3,12 +3,14 @@ using Ahlatci.Shop.Application.Models.Dtos.Products;
 using Ahlatci.Shop.Application.Models.RequestModels.Products;
 using Ahlatci.Shop.Application.Service.Abstract;
 using Ahlatci.Shop.Application.Wrapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ahlatci.Shop.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Route("product")]
 	public class ProductController : ControllerBase
 	{
 		private readonly IProductService _productService;
@@ -24,7 +26,16 @@ namespace Ahlatci.Shop.Api.Controllers
 			return Ok(categories);
 		}
 
-		[HttpGet("get/{id:int}")]
+		//service içi doldurulacak
+        [HttpGet("get")]
+        public async Task<ActionResult<Result<List<ProductWithCategoryDto>>>> GetAllProductWithDCategory()
+        {
+            var categories = await _productService.GetAllProductsWithCategory();
+            return Ok(categories);
+        }
+
+
+        [HttpGet("get/{id:int}")]
 		public async Task<ActionResult<Result<ProductDto>>> GetProductById(int id)
 		{
 			var category = await _productService.GetProductById(id);
@@ -47,15 +58,15 @@ namespace Ahlatci.Shop.Api.Controllers
 				return BadRequest();
 			}
 			
-			var categoryId = await _productService.UpdateProduct(updateProductVM);
-			return Ok(categoryId);
+			var productId = await _productService.UpdateProduct(updateProductVM);
+			return Ok(productId);
 		}
 
 		[HttpDelete("delete/{id:int}")]
 		public async Task<ActionResult<Result<int>>> DeleteProduct(int id)
 		{
-			var categoryId = await _productService.DeleteProduct(id);
-			return Ok(categoryId);
+			var productId = await _productService.DeleteProduct(id);
+			return Ok(productId);
 		}
 	}
 }

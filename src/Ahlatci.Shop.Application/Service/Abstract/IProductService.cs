@@ -14,7 +14,8 @@ namespace Ahlatci.Shop.Application.Service.Abstract
 	public interface IProductService
 	{
 		Task<Result<List<ProductDto>>> GetAllProducts();
-		Task<Result<ProductDto>> GetProductById(int id);
+		Task<Result<List<ProductWithCategoryDto>>> GetAllProductsWithCategory();
+        Task<Result<ProductDto>> GetProductById(int id);
 
 		Task<Result<int>> CreateProduct(CreateProductVM createProductVM);
 		Task<Result<bool>> UpdateProduct(UpdateProductVM updateProductVM);

@@ -11,18 +11,13 @@ using Ahlatci.Shop.Utils;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ahlatci.Shop.Application.Service.Implementation
 {
-	public class AccountService : IAccountService
+    public class AccountService : IAccountService
 	{
 		private readonly IMapper _mapper;
 		private readonly IUnitWork _uWork;
