@@ -1,6 +1,7 @@
 ﻿using Ahlatci.Shop.Application.Behaviors;
 using Ahlatci.Shop.Application.Exceptions;
 using Ahlatci.Shop.Application.Models.Dtos.Cities;
+using Ahlatci.Shop.Application.Models.Dtos.ProductImages;
 using Ahlatci.Shop.Application.Models.Dtos.Products;
 using Ahlatci.Shop.Application.Models.RequestModels.Cities;
 using Ahlatci.Shop.Application.Models.RequestModels.Products;
@@ -40,10 +41,17 @@ namespace Ahlatci.Shop.Application.Service.Implementation
 		}
 
 
-        public Task<Result<List<ProductWithCategoryDto>>> GetAllProductsWithCategory()
+        public async Task<Result<List<ProductWithCategoryDto>>> GetAllProductsWithCategory()
         {
-			//gi
-            throw new NotImplementedException();
+
+            var result = new Result<List<ProductWithCategoryDto>>();
+
+            var products = await _uwork.GetRepository<Product>().GetAllAsync();
+			var productDtos = _mapper.Map<List<Product>, List<ProductWithCategoryDto>>(products);
+ 
+
+            result.Data = productDtos;
+            return result;
         }
         public async Task<Result<ProductDto>> GetProductById(int id)
 		{

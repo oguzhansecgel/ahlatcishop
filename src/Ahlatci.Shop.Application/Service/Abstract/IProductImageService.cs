@@ -17,7 +17,7 @@ namespace Ahlatci.Shop.Application.Service.Abstract
         Task<Result<List<ProductImagesDto>>> GetAllImagesByProduct(GetAllProductImageByProductVM getByProductVM);
         Task<Result<List<ProductImageWithProductDto>>> GetAllProductImagesWithProduct(GetAllProductImageByProductVM getByProductVM);
 
-        Task<Result<int>> CreateProduct(CreateProductImageVM createProductImageVM);
-        Task<Result<bool>> DeleteProduct(DeleteProductImageVM deleteProductImageVM);
+        Task<Result<int>> CreateProductImage(CreateProductImageVM createProductImageVM);
+        Task<Result<int>> DeleteProductImage(DeleteProductImageVM deleteProductImageVM);
     }
 }

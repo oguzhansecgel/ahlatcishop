@@ -27,7 +27,7 @@ namespace Ahlatci.Shop.Api.Controllers
 		}
 
 		//service içi doldurulacak
-        [HttpGet("get")]
+        [HttpGet("gett")]
         public async Task<ActionResult<Result<List<ProductWithCategoryDto>>>> GetAllProductWithDCategory()
         {
             var categories = await _productService.GetAllProductsWithCategory();
